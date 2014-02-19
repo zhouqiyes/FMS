@@ -11,6 +11,14 @@
     <welcome-file>crud.html</welcome-file>
   </welcome-file-list>
   <servlet>
+  	<servlet-name>BranchController</servlet-name>
+  	<servlet-class>com.chinalife.fms.controller.BranchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>BranchController</servlet-name>
+  	<url-pattern>/branch/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
   	<servlet-name>UserController</servlet-name>
   	<servlet-class>com.chinalife.fms.controller.UserController</servlet-class>
   </servlet>

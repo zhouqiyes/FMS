@@ -18,12 +18,12 @@
         <form id="loginForm" method="post">
             <table>
                 <tr>
-                    <td>电子邮箱:</td>
+                    <td>账号:</td>
                     <td><input class="easyui-validatebox" type="text" name="loginId" data-options="required:true,validType:'email'"></input></td>
                 </tr>
                 <tr>
-                    <td>登录密码:</td>
-                    <td><input class="easyui-validatebox" type="password" name="loginPassword" data-options="required:true"></input></td>
+                    <td>密码:</td>
+                    <td><input class="easyui-validatebox" type="password" name="loginPwd" data-options="required:true"></input></td>
                 </tr>
             </table>
         </form>

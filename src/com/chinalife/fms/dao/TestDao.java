@@ -1,23 +1,21 @@
 package com.chinalife.fms.dao;
 
 import java.sql.Connection;
-import java.util.List;
 
-import com.chinalife.fms.bean.User;
-import com.google.gson.Gson;
+import com.chinalife.fms.bean.Branch;
 
 public class TestDao {
 
 	public static void main(String[] args) {
 		Connection con = JdbcUtil.getConnection();
-		UserDao userDao = new UserDao();
-		List<User> users = null;
+		BranchDao branchDao = new BranchDao();
 		try{
-			users = userDao.queryUsers();
-			System.out.println(new Gson().toJson(users));
-		} catch(UserDaoException e){
+			Branch branch = null;
+			branch = branchDao.retrieveRootBranch();
+			System.out.println(branchDao.convertBranchToEasyUiTreeJson(branch, branchDao.retrieveBranches(branch)));
+		} catch(Exception e){
 			System.out.println("Query error:");
-			System.out.println(e.getLocalizedMessage());
+			e.printStackTrace();
 		}
 		JdbcUtil.close(null, null, con);
 	}

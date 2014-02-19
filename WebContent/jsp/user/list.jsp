@@ -11,21 +11,20 @@
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-    <h2>用户维护</h2>
-    <div class="demo-info" style="margin-bottom:10px">
-        <div class="demo-tip icon-tip">&nbsp;</div>
-        <div>Click the buttons on datagrid toolbar to do crud actions.</div>
-    </div>
-    
     <table id="dg" title="系统用户" class="easyui-datagrid" style="width:700px;height:250px"
     	data-options="singleSelect:true,collapsible:true,rownumbers:true,pagination:true,fitColumns:true,
     		url:'<%=request.getContextPath() %>/user/list',method:'get',
     		toolbar:'#toolbar'">
         <thead>
             <tr>
+                <th data-options="field:'loginId',width:100">账号</th>
                 <th data-options="field:'name',width:100">姓名</th>
-                <th data-options="field:'phone',width:100">电话</th>
-                <th data-options="field:'email',width:100">电子邮箱</th>
+                <th data-options="field:'email',width:100">邮箱</th>
+                <th data-options="field:'branch',width:100,
+                	formatter:function(value,row,index){
+                		return row.branch.name;
+                	}
+                	">机构</th>
             </tr>
         </thead>
     </table>
@@ -39,17 +38,27 @@
             closed="true" buttons="#dlg-buttons">
         <div class="ftitle">用户信息</div>
         <form id="fm" method="post" novalidate>
+        	 <div class="fitem">
+                <label>账号：</label>
+                <input name="loginId" class="easyui-validatebox" data-options="required:true" />
+            </div>
+            <div class="fitem">
+                <label>密码：</label>
+                <input name="loginPwd" type="password" class="easyui-validatebox" data-options="required:true" />
+            </div>
             <div class="fitem">
                 <label>姓名：</label>
-                <input name="name" class="easyui-validatebox" required="true">
+                <input name="name" class="easyui-validatebox" data-options="required:true" />
             </div>
             <div class="fitem">
-                <label>电话：</label>
-                <input name="phone">
+                <label>邮箱：</label>
+                <input name="email" class="easyui-validatebox" data-options="validType:'email'" />
             </div>
             <div class="fitem">
-                <label>电子邮箱：</label>
-                <input name="email" class="easyui-validatebox" validType="email">
+                <label>机构：</label>
+                <input id="combotree-branch" name="branch" class="easyui-combotree" 
+                	data-options="url:'<%=request.getContextPath() %>/branch/list',method:'get',required:true"
+                />
             </div>
         </form>
     </div>
@@ -60,7 +69,7 @@
     <script type="text/javascript">
         var url;
         function newUser(){
-            $('#dlg').dialog('open').dialog('setTitle','New User');
+            $('#dlg').dialog('open').dialog('setTitle','新建用户');
             $('#fm').form('clear');
             url = 'save_user.php';
         }
@@ -69,7 +78,8 @@
             if (row){
                 $('#dlg').dialog('open').dialog('setTitle','编辑用户');
                 $('#fm').form('load',row);
-                url = 'update_user.php?id='+row.id;
+                $('#combotree-branch').combotree('setValue', row.branch.branchId);
+                url = '<%=request.getContextPath() %>/user/update';
             }
         }
         function saveUser(){

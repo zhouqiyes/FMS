@@ -1,23 +1,23 @@
 package com.chinalife.fms.bean;
 
 public class User {
-	private String loginID;
-	private String loginPassword;
+	private String loginId;
+	private String loginPwd;
 	private String name;
-	private String phone;
 	private String email;
+	private Branch branch;
 	
-	public String getLoginID() {
-		return loginID;
+	public String getLoginId() {
+		return loginId;
 	}
-	public void setLoginID(String loginID) {
-		this.loginID = loginID;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
-	public String getLoginPassword() {
-		return loginPassword;
+	public String getLoginPwd() {
+		return loginPwd;
 	}
-	public void setLoginPassword(String loginPassword) {
-		this.loginPassword = loginPassword;
+	public void setLoginPwd(String loginPwd) {
+		this.loginPwd = loginPwd;
 	}
 	public String getName() {
 		return name;
@@ -25,17 +25,17 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	public Branch getBranch() {
+		return branch;
+	}
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+
 }

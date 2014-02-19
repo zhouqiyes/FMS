@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class JdbcUtil {
-	private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=FMS;";
+	
+	private static final String SERVER = "10.113.1.207";
+	private static final String DATABASE = "FMS";
+	private static final String URL = "jdbc:sqlserver://"+SERVER+":1433;databaseName="+DATABASE;
 	private static final String USER = "sa";
-	private static final String PASSWORD = "Life888!";
+	private static final String PASSWORD = "gu@ngzh0u";
 
 	static {
 		try {

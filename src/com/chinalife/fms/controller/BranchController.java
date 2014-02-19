@@ -1,25 +1,24 @@
 package com.chinalife.fms.controller;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chinalife.fms.service.UserService;
-import com.chinalife.fms.service.UserServiceException;
+import com.chinalife.fms.service.BranchService;
+import com.chinalife.fms.service.BranchServiceException;
 
-public class UserController extends HttpServlet {
+public class BranchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private UserService service = new UserService();
+	private BranchService service = new BranchService();
 	
-	public UserService getService() {
+	public BranchService getService() {
 		return service;
 	}
-	public void setService(UserService service) {
+	public void setService(BranchService service) {
 		this.service = service;
 	}
 
@@ -32,10 +31,12 @@ public class UserController extends HttpServlet {
 		switch (action) {
 			case "list":
 				try {
-					resultJson = service.retrieveUsers();
-				} catch (UserServiceException e) {
+					resultJson = service.retrieveBranches();
+				} catch (Exception e) {
 					e.printStackTrace();
 				}	
+				break;
+			case "":
 				break;
 		}
 		resp.setCharacterEncoding("UTF-8");
@@ -46,18 +47,6 @@ public class UserController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		StringBuffer reqURL = req.getRequestURL();
-		String action = reqURL.substring(reqURL.lastIndexOf("/") + 1);
-		switch (action) {
-		case "update":
-			System.out.println(req.getParameter("branch"));
-			Enumeration<String> parameterNames = req.getParameterNames();
-			while(parameterNames.hasMoreElements()){
-				System.out.println(parameterNames.nextElement());
-			}
-			break;
-	}
-	resp.setCharacterEncoding("UTF-8");
 		
 	}
 
